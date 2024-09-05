@@ -1,6 +1,7 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from phonenumber_field.modelfields import PhoneNumberField
 
 import uuid
 from .managers import CustomUserManager
@@ -14,6 +15,7 @@ class User(AbstractUser):
         ('builder', 'Builder'),
     ]
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, unique=True)
+    phone_number = PhoneNumberField(blank=True)
     email = models.EmailField(_('email address'), unique=True)
     user_type = models.CharField(max_length=7, choices=USER_TYPE, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
