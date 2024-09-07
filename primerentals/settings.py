@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-^_1+m&6i2_e80vzceg90b=7kj2_g8afb!zakxv=1vjva*7@_gq
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'accounts',
 
     'rest_framework',
+    'corsheaders',
 ]
 AUTH_USER_MODEL = 'accounts.User'
 MIDDLEWARE = [
@@ -51,7 +52,18 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # React app's address
+]
+
+# Optional: Allow credentials (cookies, HTTP authentication) to be sent
+CORS_ALLOW_CREDENTIALS = True
+
+# Optional: If you need to allow all headers
+CORS_ALLOW_ALL_HEADERS = True
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
